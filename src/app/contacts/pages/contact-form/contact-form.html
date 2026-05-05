@@ -1,1 +1,63 @@
-<p>contact-form works!</p>,
+<form class="w-md mx-auto mt-20 p-8 flex flex-col items-center gap-5 border border-slate-700 shadow-2xl rounded-xl bg-slate-800">
+  
+  <h2 class="text-2xl font-bold text-slate-200 mb-2">New Contact</h2>
+
+  <!-- Full Name -->
+  <div class="flex flex-col gap-1.5 w-full">
+    <label for="full-name" class="text-sm text-slate-400 w-4/5 self-center">
+      Full Name
+    </label>
+    <input
+      type="text"
+      id="full-name"
+      class="px-3 py-1.5 text-md placeholder:text-slate-600 border text-slate-200 border-slate-700 rounded-md bg-slate-900 w-4/5 self-center focus:outline-none focus:ring-2 focus:ring-slate-600"
+      placeholder="Mario Daza"
+      required />
+  </div>
+
+  <!-- Email -->
+  <div class="flex flex-col gap-1.5 w-full">
+    <label for="email" class="text-sm text-slate-400 w-4/5 self-center">
+      Email Address
+    </label>
+    <input
+      type="email"
+      id="email"
+      class="px-3 py-1.5 text-md placeholder:text-slate-600 border text-slate-200 border-slate-700 rounded-md bg-slate-900 w-4/5 self-center focus:outline-none focus:ring-2 focus:ring-slate-600"
+      placeholder="mario@example.com"
+      required />
+  </div>
+
+  <!-- Phone Number -->
+  <div class="flex flex-col gap-1.5 w-full">
+    <label for="phone" class="text-sm text-slate-400 w-4/5 self-center">
+      Phone Number
+    </label>
+    <input
+      type="tel"
+      id="phone"
+      class="px-3 py-1.5 text-md placeholder:text-slate-600 border text-slate-200 border-slate-700 rounded-md bg-slate-900 w-4/5 self-center focus:outline-none focus:ring-2 focus:ring-slate-600"
+      placeholder="234 567 890"
+      required />
+  </div>
+
+  <!-- Address -->
+  <div class="flex flex-col gap-1.5 w-full">
+    <label for="address" class="text-sm text-slate-400 w-4/5 self-center">
+      Address
+    </label>
+    <input
+      type="text"
+      id="address"
+      class="px-3 py-1.5 text-md placeholder:text-slate-600 border text-slate-200 border-slate-700 rounded-md bg-slate-900 w-4/5 self-center focus:outline-none focus:ring-2 focus:ring-slate-600"
+      placeholder="123 Street, City"
+      required />
+  </div>
+
+  <!-- Button -->
+  <button class="mt-4 w-4/5 text-slate-200 px-5 py-2.5 text-md font-medium rounded border border-slate-700 bg-sky-700 hover:bg-sky-500 cursor-pointer transition-colors">
+    ADD CONTACT
+  </button>
+  <a href="" class="text-slate-400 underline">get back to contacts</a>
+
+</form>
