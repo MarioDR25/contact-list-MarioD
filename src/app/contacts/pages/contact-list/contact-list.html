@@ -1,12 +1,17 @@
 <div class="flex flex-col gap-4 px-8 py-6">
-  <div class="flex justify-end">
-    <button class="bg-sky-600 hover:bg-sky-700 px-4 py-2 rounded-lg text-slate-200 text-sm font-medium cursor-pointer flex items-center gap-2">
-  <span class="font-black text-lg leading-none mb-0.5">+</span> 
-  Add New Contact
-</button>
+  <div class="flex justify-between">
+    <button 
+    routerLink="/my-agenda/contacts/form"
+    class="bg-sky-600 hover:bg-sky-700 px-4 py-2 rounded-lg text-slate-200 text-sm font-medium cursor-pointer flex items-center gap-2"> 
+      <span class="font-black text-lg leading-none mb-0.5">+</span>
+      Add New Contact
+    </button>
+    <a (click)="onExit()"
+      class="bg-red-700 hover:bg-red-600 px-4 py-2 rounded-lg text-slate-200 text-sm font-medium cursor-pointer flex items-center gap-2">Exit 
+      <i class="fa-solid fa-arrow-right-from-bracket"></i>
+    </a>
   </div>
-  <app-contact-card />
-  <app-contact-card />
-  <app-contact-card />
-  <app-contact-card />
+
+  <app-contact-card [contacts]="contactStore.agenda()?.contacts || []" (onRemoveContact)="onDeleteContact($event)"/>
+  
 </div>
