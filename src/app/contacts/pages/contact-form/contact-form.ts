@@ -6,11 +6,11 @@ import { ContactStore } from '../../contact-store';
 
 @Component({
   selector: 'app-contact-form',
-  imports: [RouterLink, FormsModule],
+  imports: [FormsModule],
   templateUrl: './contact-form.html',
 })
 
-// contact-form.ts
+
 export class ContactForm {
   contactStore = inject(ContactStore);
   router = inject(Router);  
@@ -64,7 +64,6 @@ export class ContactForm {
       error: (err) => console.error('Error al editar:', err),
     });
   }
-
 
 
   onCancel() {

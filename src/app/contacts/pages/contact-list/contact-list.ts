@@ -7,7 +7,7 @@ import { Contact } from '../../contact.models';
 
 @Component({
   selector: 'app-contact-list',
-  imports: [ContactCard, RouterLink, NgFor],
+  imports: [ContactCard, RouterLink],
   templateUrl: './contact-list.html',
 })
 export class ContactList {
