@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-4 px-8 py-6">
+<div class="flex flex-col gap-5 px-8 py-6">
   <div class="flex justify-between">
     <button 
     routerLink="/my-agenda/contacts/form"
@@ -6,12 +6,26 @@
       <span class="font-black text-lg leading-none mb-0.5">+</span>
       Add New Contact
     </button>
-    <a (click)="onExit()"
+    <div (click)="onExit()"
       class="bg-red-700 hover:bg-red-600 px-4 py-2 rounded-lg text-slate-200 text-sm font-medium cursor-pointer flex items-center gap-2">Exit 
       <i class="fa-solid fa-arrow-right-from-bracket"></i>
-    </a>
+    </div>
   </div>
-
-  <app-contact-card [contacts]="contactStore.agenda()?.contacts || []" (onRemoveContact)="onDeleteContact($event)"/>
   
+
+
+
+  @for (item of contactStore.agenda()?.contacts; track item.id) {
+  <app-contact-card 
+    [contact]="item" 
+    (onRemoveContact)="onDeleteContact($event)"
+    (onEditContact)="onEditContact($event)"
+    >
+  </app-contact-card>
+} @empty {
+    <div class="text-center text-2xl text-slate-400 pt-10 ">No contacts to show &nbsp;<i class="fa-solid fa-user-plus"></i></div>
+
+}
+ 
 </div>
+

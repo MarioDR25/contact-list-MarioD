@@ -1,6 +1,6 @@
-import { Component, Input, input, output } from '@angular/core';
-import { required } from '@angular/forms/signals';
+import { Component, inject, input, output } from '@angular/core';
 import { Contact } from '../../contact.models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contact-card',
@@ -8,15 +8,37 @@ import { Contact } from '../../contact.models';
   templateUrl: './contact-card.html',
 })
 export class ContactCard {
-  contacts = input.required<Contact[]>()
-  
+  isOpen = false;
+  itemToDelete: number | null = null;
+  contact = input.required<Contact>();
   onRemoveContact = output<number>();
+  onEditContact = output<Contact>();
 
-  onRemove(id: number) {
-    console.log('Envié el id ', id);
-    
-    this.onRemoveContact.emit(id)
+
+ private router = inject(Router);
+  
+ onEdit(contact: Contact) {
+     this.onEditContact.emit(contact)
+     this.router.navigate(['/my-agenda/contacts/form']);
+ }
+
+ onRemove(id: number ) {
+    this.itemToDelete = id;
+    this.isOpen = true;
   }
 
-  onEdit(id: number) {} 
+
+  close() {
+    this.isOpen = false;
+    this.itemToDelete = null;
+  }
+
+  confirmDelete() {
+    if (this.itemToDelete) {
+      console.log('Eliminando:', this.itemToDelete);
+      this.onRemoveContact.emit(this.itemToDelete);
+    }
+    this.close();
+  }
+
 }

@@ -1,0 +1,28 @@
+[ {
+      "name": "Alice Johnson",
+      "phone": "555-0102",
+      "email": "alice.j@example.com",
+      "address": "123 Maple St, Springfield",
+      "id": 1
+    },
+    {
+      "name": "Roberto Gómez",
+      "phone": "600-123-456",
+      "email": "roberto.g@mail.es",
+      "address": "Calle Mayor 15, Madrid",
+      "id": 2
+    },
+    {
+      "name": "Sarah Connor",
+      "phone": "555-1984",
+      "email": "s.connor@sky-net.com",
+      "address": "742 Evergreen Terrace, Cyberdyne",
+      "id": 3
+    },
+    {
+      "name": "Kenji Tanaka",
+      "phone": "81-90-1234-5678",
+      "email": "tanaka.k@tech-jp.com",
+      "address": "2-1-1 Nihonbashi, Chuo City, Tokyo",
+      "id": 4
+    }]

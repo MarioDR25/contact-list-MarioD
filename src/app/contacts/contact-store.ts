@@ -1,7 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Angenda } from './contact.models';
+import { AgendaResponse, Agenda, Contact } from './contact.models';
 import { HttpClient } from '@angular/common/http';
-import { map, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 const URL = 'https://playground.4geeks.com/contact';
 
@@ -10,51 +10,43 @@ const URL = 'https://playground.4geeks.com/contact';
 })
 export class ContactStore {
   private http = inject(HttpClient);
-  agenda = signal<Angenda | null>(null);
+  agenda = signal<Agenda | null>(null);
+  contactEdit = signal<Contact | null>(null)
 
   resetAgenda() {
-    console.log('limpiando');
-    
     this.agenda.set({ slug: '', contacts: [] });
-    console.log(this.agenda());
-    
+    console.log(' me ejecute limpiando ', this.agenda());
   }
 
-  createAgenda(name: string) {
-    return this.http.post(`${URL}/agendas/${name}`, null);
+  resetForCreate() {
+    this.contactEdit.set({ name: '', phone: '', email: '', address: '' } as Contact);
   }
 
-  getAgenda(name: string) {
+  createAgenda(name: string): Observable<AgendaResponse> {
+    return this.http.post<AgendaResponse>(`${URL}/agendas/${name}`, null);
+  }
+  
+  getAgenda(name: string): Observable<Agenda> {
     return this.http
-      .get<Angenda>(`${URL}/agendas/${name}`)
-      .pipe(tap((items) => this.agenda.set(items)),
-      tap((items) => console.log(items))
-      );
+      .get<Agenda>(`${URL}/agendas/${name}`)
+      .pipe<Agenda>(tap<Agenda>((items) => this.agenda.set(items)));
   }
 
-  createContact() {
-    this.http.post(`${URL}/agendas/${name}/contacts`, null)
+  createContact(form : Omit<Contact, 'id'>): Observable<Contact> {
+    return this.http.post<Contact>(`${URL}/agendas/${this.agenda()?.slug}/contacts`, form)
+
+  }
+  
+
+
+  // contact.service.ts
+  updateContact(id: number, contact: Omit<Contact, 'id'>): Observable<Contact> {
+    return this.http.put<Contact>(`${URL}/agendas/${this.agenda()?.slug}/contacts/${id}`, contact);
   }
 
 
-  updateContact() {}
-
-  deleteContact(id: number) {
+  deleteContact(id: number): Observable<string>{
     const slug = this.agenda()?.slug
-    this.http.delete(`${URL}/agendas/${slug}/contacts/${id}`).subscribe({
-      next : () => {
-        this.agenda.update(current => {
-          if(!current) return null;
-          return {
-            ...current, 
-            contacts: current.contacts.filter(c => c.id != id)
-          }
-        })
-      },
-      error : (error) => console.error('Error al borrar', error )
-    })
-    
+    return this.http.delete<string>(`${URL}/agendas/${slug}/contacts/${id}`)
   }
-
-
 }

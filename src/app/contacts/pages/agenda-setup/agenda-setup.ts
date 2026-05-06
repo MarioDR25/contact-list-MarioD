@@ -13,12 +13,13 @@ export class AgendaSetup {
   private router = inject(Router);
 
   agendaData = signal<string>('');
-  isFormReady = computed<boolean>(() => this.agendaData().trim().length <= 0);
+  isFormReady = computed<boolean>(() => this.agendaData().trim().length === 0);
 
   updateName(nameInp: string) {
     console.log(nameInp);
     this.agendaData.set(nameInp);
   }
+
 
   onStart() {
     const name = this.agendaData();
@@ -38,7 +39,7 @@ export class AgendaSetup {
       )
       .subscribe({
         next: () => {
-          console.log('Todo listo, navegando...');
+          console.log('Todo listo, navegando... ', this.contactStore.agenda());
           this.router.navigate(['my-agenda/contacts']);
         },
         error: (err) => console.error('Error definitivo:', err),
